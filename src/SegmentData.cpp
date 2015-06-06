@@ -43,11 +43,11 @@ SegmentData::SegmentData(const string &fname, double lower, double upper)
 			segments[pop] = newEntry;
 		}
 		//this added to calculate mixture proportions
-		proportions.at(pop) += len;
+		proportions[pop] += len;
 		//if len between lower and upper, then add to the data
 		if (len > lower && len < upper)
 		{
-			segments.at(pop).push_back(len);
+			segments[pop].push_back(len);
 		}
 	}
 
@@ -59,8 +59,8 @@ SegmentData::SegmentData(const string &fname, double lower, double upper)
 	}
 	pop = labels.at(0);
 	string pop2 = labels.at(1);
-	proportions.at(pop) = proportions.at(pop) / (proportions.at(pop) + proportions.at(pop2));
-	proportions.at(pop2) = 1 - proportions.at(pop);
+	proportions[pop] = proportions[pop] / (proportions[pop] + proportions[pop2]);
+	proportions[pop2] = 1 - proportions[pop];
 	this->proportions = proportions;
 	this->labels = labels;
 	this->segments = segments;
@@ -77,7 +77,7 @@ vector<string> SegmentData::getLabels() const
 
 vector<double> SegmentData::getSegments(const string &label) const
 {
-	return segments.at(label);
+	return segments[label];
 }
 
 map<string, double> SegmentData::getProportions() const
@@ -88,14 +88,14 @@ map<string, double> SegmentData::getProportions() const
 vector<double> SegmentData::sampleSeg(const string &label, boost::mt19937 &generator, double prop) const
 {
 	int index = 0;
-	int numSeg = segments.at(label).size();
+	int numSeg = segments[label].size();
 	boost::uniform_int<> sample(0, numSeg - 1);
 	int numSamp = int(prop * numSeg);
 	vector<double> segment;
 	for (int i = 0; i < numSamp; ++i)
 	{
 		index = sample(generator);
-		segment.push_back(segments.at(label).at(index));
+		segment.push_back(segments[label].at(index));
 	}
 	return segment;
 }

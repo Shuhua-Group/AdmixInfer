@@ -73,7 +73,7 @@ int main(int argc, char ** argv)
 		pop1 = pops.at(1);
 		pop2 = pops.at(0);
 	}
-	prop1 = props[pop1];
+	prop1 = props.at(pop1);
 	hi = new HIModel(1, prop1);
 	ga = new GAModel(1, prop1);
 	cgfr = new CGFModel(1, prop1);
@@ -107,7 +107,7 @@ int main(int argc, char ** argv)
 		cout << "Results Summary" << endl;
 		cout << "----------------------------------------------------------" << endl;
 		cout << "Parental populations: " << pop1 << ", " << pop2 << endl;
-		cout << "Admixture proportions: " << props[pop1] << ", " << props[pop2] << endl;
+		cout << "Admixture proportions: " << props.at(pop1) << ", " << props.at(pop2) << endl;
 		cout << "Optimal-model: " << models[index] << ", generation: " << indexes[index] << ", likelihood: " << globalMax[index] << endl;
 		cout << "----------------------------------------------------------" << endl;
 	}
@@ -137,7 +137,7 @@ int main(int argc, char ** argv)
 				vector<double> tmp;
 				optGens[index] = tmp;
 			}
-			optGens[index].push_back(indexes[index]);
+			optGens.at(index).push_back(indexes[index]);
 			if (!isQuiet)
 			{
 				cout << "Bootstrap-" << k + 1 << "--> model: " << models[index] << ", generation: " << indexes[index] << ", likelihood: " << globalMax[index]
@@ -160,8 +160,8 @@ int main(int argc, char ** argv)
 				bestMod = it->first;
 			}
 		}
-		double meanGen = mean(optGens[bestMod]);
-		double varGen = var(optGens[bestMod], meanGen);
+		double meanGen = mean(optGens.at(bestMod));
+		double varGen = var(optGens.at(bestMod), meanGen);
 		double ci = t_confidence_interval(maxCounts, varGen, par->getAlpha());
 		double right_per = 100.0 * maxCounts / par->getBootstrap();
 		double conf_level = (1 - (par->getAlpha())) * 100;
@@ -169,7 +169,7 @@ int main(int argc, char ** argv)
 		cout << "Results Summary" << endl;
 		cout << "----------------------------------------------------------" << endl;
 		cout << "Parental populations: " << pop1 << ", " << pop2 << endl;
-		cout << "Admixture proportions: " << props[pop1] << ", " << props[pop2] << endl;
+		cout << "Admixture proportions: " << props.at(pop1) << ", " << props.at(pop2) << endl;
 		cout << "Optimal-model: " << models[bestMod] << setprecision(4) << "(" << right_per << "%)" << endl;
 		cout << "Generation: " << meanGen << ", " << conf_level << "% confidence interval: (" << meanGen - ci << ", " << meanGen + ci << ")" << endl;
 		cout << "----------------------------------------------------------" << endl;

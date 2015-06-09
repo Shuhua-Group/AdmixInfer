@@ -1,14 +1,15 @@
 AdmixInfer v1.0.4
 =================================================
-Short Description:
+Short description:
 AdmixInfer is designed to optimize the parameters of admixture model
 via maximum likelihood estimation and figure out the model best fit 
-the data. The optimization is under assumption of HI, GA, CGFR and 
-CGFD model.
+the data. The optimization is under assumption of HI (Hybrid Isolation), 
+GA(Gradual Admixture), CGFR (Continuous Gene Flow Recipient) and 
+CGFD (Continuous Gene Flow Donor) model.
 
 1.Compile
 1.1 Library dependency
-AdmixInfer depend on boost library, make sure the boost is installed
+AdmixInfer depend on boost library, make sure the boost is installed.
 Installation of boost can be found at 
 http://www.boost.org/doc/libs/1_58_0/more/getting_started/unix-variants.html
 
@@ -19,8 +20,8 @@ bash$ tar -zvxf AdmixInfer.tar.gz
 bash$ cd AdmixInfer/src
 bash$ make
 
-After compiling, you will get the executable AdmixInfer, just
-typing the command below to get help information:
+After compiling, you will get the executable AdmixInfer, just typing the 
+command below to get help information:
 
 bash$ ./AdmixInfer -h or bash$ ./AdmixInfer --help
 
@@ -36,24 +37,23 @@ The format will explained later
 
 The following is output of the toy data:
 
-//CMD: ./AdmixInfer-fast -i example/sim1.seg 
+//CMD: ./AdmixInfer -i example/sim1.seg 
 
 Reading ancestral tracks from example/sim1.seg
 Start optimizing process... 
 
-Results Summary
+Results summary
 ----------------------------------------------------------
-Parental populations: 1, 2
+Reference populations: 1, 2
 Admixture proportions: 0.287948, 0.712052
 Optimal-model: HI, generation: 51, likelihood: 50290.4
 ----------------------------------------------------------
 
 The results show that the toy data. The simulated admixed population
-has two parental populations with label 1 and 2, corresponding mixture
-proportions are 0.287948 and 0.712052, the optimal model is HI (Hybrid
-Isolation), and the generation is 51. The simulated population is under
-HI model and 30% and 70% mixture proportions, admixture started 50
-generations ago.
+has two reference populations with label 1 and 2, corresponding mixture
+proportions are 0.287948 and 0.712052, the optimal model is HI, and the 
+generation is 51. The simulated population is under HI model and 30% 
+and 70% mixture proportions, admixture started 50 generations ago.
  
 User can redirect the output to a file, such as:
 
@@ -74,7 +74,7 @@ will be redirected to sim1_fopt.log.
 
 The results is:
 
-//CMD: Debug/AdmixInfer-fast -i example/sim1.seg -l 0.01 -u 0.5 -a 0.01 \
+//CMD: ./AdmixInfer -i example/sim1.seg -l 0.01 -u 0.5 -a 0.01 \
 	-b 100 -p 0.5 
 
 Reading ancestral tracks from example/sim1.seg
@@ -86,9 +86,9 @@ Bootstrap-2--> model: HI, generation: 51, likelihood: 18915.4
 Bootstrap-100--> model: HI, generation: 51, likelihood: 18999.4
 Finish bootstrapping, processing results...
 
-Results Summary
+Results summary
 ----------------------------------------------------------
-Parental populations: 1, 2
+Reference populations: 1, 2
 Admixture proportions: 0.287948, 0.712052
 Optimal-model: HI(100%)
 Generation: 51.08, 99% confidence interval: (50.92, 51.24)
@@ -155,7 +155,7 @@ equal size of tracks in each bootstrapping repeat.
 GNU GENERAL PUBLIC LICENSE Version 3 
 http://www.gnu.org/licenses/gpl-3.0.html
 =================================================
-7. Questions and Suggestions
-Questions and Suggestions are welcomed, feel free to contact 
+7. Questions and suggestions
+Questions and suggestions are welcomed, feel free to contact 
 Shawn xyang619@gmail.com
 

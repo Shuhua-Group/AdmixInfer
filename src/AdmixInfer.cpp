@@ -104,9 +104,9 @@ int main(int argc, char ** argv)
 		indexes[3] = cgfd->getGeneration();
 		int index = indexOfMax(globalMax, 4);
 		cout << endl;
-		cout << "Results Summary" << endl;
+		cout << "Results summary" << endl;
 		cout << "----------------------------------------------------------" << endl;
-		cout << "Parental populations: " << pop1 << ", " << pop2 << endl;
+		cout << "Reference populations: " << pop1 << ", " << pop2 << endl;
 		cout << "Admixture proportions: " << props.at(pop1) << ", " << props.at(pop2) << endl;
 		cout << "Optimal-model: " << models[index] << ", generation: " << indexes[index] << ", likelihood: " << globalMax[index] << endl;
 		cout << "----------------------------------------------------------" << endl;

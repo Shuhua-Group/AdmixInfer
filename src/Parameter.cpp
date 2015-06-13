@@ -13,7 +13,7 @@
 using namespace std;
 
 Parameter::Parameter(int argc, char **argv) :
-		quiet(0), bootstrap(1), lower(0), upper(kInfinity), alpha(0.05), sampleProp(1.0)
+		quiet(false), bootstrap(1), lower(0), upper(kInfinity), alpha(0.05), sampleProp(1.0)
 {
 	if (argc < 2)
 	{
@@ -115,7 +115,7 @@ bool Parameter::check()
 	if (upper < lower)
 	{
 		cerr << "Upper bound should larger than lower bound, otherwise all data will be filtered out!" << endl;
-		return 0;
+		return false;
 	}
 	if (alpha > 1 || alpha < 0)
 	{
@@ -125,7 +125,7 @@ bool Parameter::check()
 	if (fname.length() == 0)
 	{
 		cerr << "Input filename is empty!" << endl;
-		return 0;
+		return false;
 	}
 	if (bootstrap < 1)
 	{
@@ -137,7 +137,7 @@ bool Parameter::check()
 		cerr << "Proportion of bootstrapping resampling should be positive, reset to default 1.0" << endl;
 		sampleProp = 1.0;
 	}
-	return 1;
+	return true;
 }
 
 void Parameter::help() const

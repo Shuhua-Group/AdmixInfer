@@ -23,9 +23,9 @@ SegmentData::SegmentData(const string &fname, double lower, double upper)
 	string line;
 	string pop;
 	double start, end;
-	vector<string> labels;
-	map<string, double> proportions;
-	map<string, vector<double> > segments;
+	//vector<string> labels;
+	//map<string, double> proportions;
+	//map<string, vector<double> > segments;
 
 	while (getline(fin, line))
 	{
@@ -61,9 +61,9 @@ SegmentData::SegmentData(const string &fname, double lower, double upper)
 	string pop2 = labels.at(1);
 	proportions.at(pop) = proportions.at(pop) / (proportions.at(pop) + proportions.at(pop2));
 	proportions.at(pop2) = 1 - proportions.at(pop);
-	this->proportions = proportions;
-	this->labels = labels;
-	this->segments = segments;
+	//this->proportions = proportions;
+	//this->labels = labels;
+	//this->segments = segments;
 }
 
 SegmentData::~SegmentData()

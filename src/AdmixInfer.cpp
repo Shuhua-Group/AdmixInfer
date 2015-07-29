@@ -16,6 +16,7 @@
 #include "Parameter.hpp"
 #include "SegmentData.hpp"
 #include "Utils.hpp"
+#include "omp.h"
 
 using namespace std;
 
@@ -94,14 +95,29 @@ int main(int argc, char ** argv)
 	{
 		vector<double> segs1 = seg->getSegments(pop1);
 		vector<double> segs2 = seg->getSegments(pop2);
+		#pragma omp parallel sections
+		{
+		#pragma omp section	
+		{
 		globalMax[0] = optimize(segs1, segs2, hi, lower, upper);
 		indexes[0] = hi->getGeneration();
+		}
+		#pragma omp section
+		{
 		globalMax[1] = optimize(segs1, segs2, ga, lower, upper);
 		indexes[1] = ga->getGeneration();
+		}
+		#pragma omp section
+		{
 		globalMax[2] = optimize(segs1, segs2, cgfr, lower, upper);
 		indexes[2] = cgfr->getGeneration();
+		}
+		#pragma omp section
+		{
 		globalMax[3] = optimize(segs2, segs1, cgfd, lower, upper);
 		indexes[3] = cgfd->getGeneration();
+		}
+		}
 		int index = indexOfMax(globalMax, 4);
 		cout << endl;
 		cout << "Results summary" << endl;
@@ -123,14 +139,29 @@ int main(int argc, char ** argv)
 		{
 			vector<double> segs1 = seg->sampleSeg(pop1, generator, samProp);
 			vector<double> segs2 = seg->sampleSeg(pop2, generator, samProp);
+			#pragma omp parallel sections
+			{
+			#pragma omp section	
+			{
 			globalMax[0] = optimize(segs1, segs2, hi, lower, upper);
 			indexes[0] = hi->getGeneration();
+			}
+			#pragma omp section
+			{
 			globalMax[1] = optimize(segs1, segs2, ga, lower, upper);
 			indexes[1] = ga->getGeneration();
+			}
+			#pragma omp section
+			{
 			globalMax[2] = optimize(segs1, segs2, cgfr, lower, upper);
 			indexes[2] = cgfr->getGeneration();
+			}
+			#pragma omp section
+			{
 			globalMax[3] = optimize(segs2, segs1, cgfd, lower, upper);
 			indexes[3] = cgfd->getGeneration();
+			}
+			}
 			int index = indexOfMax(globalMax, 4);
 			if (optGens.find(index) == optGens.end())
 			{

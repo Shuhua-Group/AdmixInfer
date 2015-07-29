@@ -1,6 +1,6 @@
 CXX = g++
 
-CXXFLAGS =	-O2 -Wall
+CXXFLAGS =	-O2 -Wall -fopenmp
 
 SRCS = SpecModel.cpp HIModel.cpp GAModel.cpp CGFModel.cpp SegmentData.cpp Utils.cpp Parameter.cpp AdmixInfer.cpp
 

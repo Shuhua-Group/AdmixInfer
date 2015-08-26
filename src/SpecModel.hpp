@@ -21,7 +21,7 @@
 
 #include <vector>
 
-const double kInfinity = 1.0e50;
+const double kInfinity = 0xFFFFFFFF;
 
 class SpecModel
 {

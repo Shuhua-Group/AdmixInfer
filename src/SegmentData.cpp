@@ -30,9 +30,7 @@ SegmentData::SegmentData(const string &fname, double lower, double upper)
 	while (getline(fin, line))
 	{
 		istringstream iss(line);
-		iss >> start;
-		iss >> end;
-		iss >> pop;
+		iss >> start >> end >> pop;
 		double len = end - start;
 		//if no population label find, push back
 		if (find(labels.begin(), labels.end(), pop) == labels.end())
